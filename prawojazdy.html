@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <title>mObywatel - Prawo Jazdy</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="assets/card.css">
+    <link rel="stylesheet" href="assets/main.css">
+    <link rel="icon" type="image/x-icon" href="https://i.imgur.com/U7TRg0V.png">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8, user-scalable=no">
+    <style>
+        body {
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .container {
+            padding: 16px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 10px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 15px;
+        }
+        .card-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+        .card-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        .info-group {
+            margin-bottom: 10px;
+        }
+        .info-label {
+            font-size: 11px;
+            color: #666;
+            margin-bottom: 2px;
+            font-weight: 500;
+        }
+        .info-value {
+            font-size: 14px;
+            font-weight: 400;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .card-photo {
+            width: 100px;
+            height: 120px;
+            background-color: #f0f0f0;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 12px;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="top_bar">
+        <div class="top_bar_grid">
+            <div class="back_button" onclick="history.back()">
+                <img class="back_arrow" src="https://i.imgur.com/lTxuUMF.png">
+            </div>
+            <p class="top_bar_title">mPrawoJazdy</p>
+            <div class="top_bar_icons">
+                <img class="top_bar_icon" src="https://i.imgur.com/2vMOWiD.png">
+                <img class="top_bar_icon" src="https://i.imgur.com/2vMOWiD.png">
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <div>
+                    <div class="info-label">NUMER PRAWA JAZDY</div>
+                    <div class="info-value" id="licenseNumber">ABC123456</div>
+                </div>
+                <div class="card-photo">
+                    ZDJĘCIE<br>KIEROWCY
+                </div>
+            </div>
+            
+            <div class="card-body">
+                <div class="info-group">
+                    <div class="info-label">NAZWISKO</div>
+                    <div class="info-value" id="lastName">KOWALSKI</div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">IMIĘ (IMIONA)</div>
+                    <div class="info-value" id="firstName">JAN</div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">DATA URODZENIA</div>
+                    <div class="info-value" id="birthDate">01.01.1990</div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">MIEJSCE URODZENIA</div>
+                    <div class="info-value" id="birthPlace">WARSZAWA</div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">DATA WYDANIA</div>
+                    <div class="info-value" id="issueDate">01.01.2020</div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">WAŻNE DO</div>
+                    <div class="info-value" id="expiryDate">01.01.2030</div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">WYDAJĄCY</div>
+                    <div class="info-value" id="issuedBy">URZĄD MIASTA WARSZAWA</div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">KATEGORIE</div>
+                    <div class="info-value" id="categories">B, B1, AM</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom_buttons">
+            <button class="action_button" onclick="showQR()">POKAŻ KOD QR</button>
+            <button class="action_button secondary" onclick="showDetails()">SZCZEGÓŁY</button>
+        </div>
+    </div>
+
+    <script>
+        // Load saved data or use default
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedData = JSON.parse(localStorage.getItem('prawoJazdyData')) || {
+                licenseNumber: 'ABC123456',
+                lastName: 'KOWALSKI',
+                firstName: 'JAN',
+                birthDate: '01.01.1990',
+                birthPlace: 'WARSZAWA',
+                issueDate: '01.01.2020',
+                expiryDate: '01.01.2030',
+                issuedBy: 'URZĄD MIASTA WARSZAWA',
+                categories: 'B, B1, AM'
+            };
+
+            // Update fields
+            document.getElementById('licenseNumber').textContent = savedData.licenseNumber;
+            document.getElementById('lastName').textContent = savedData.lastName;
+            document.getElementById('firstName').textContent = savedData.firstName;
+            document.getElementById('birthDate').textContent = savedData.birthDate;
+            document.getElementById('birthPlace').textContent = savedData.birthPlace;
+            document.getElementById('issueDate').textContent = savedData.issueDate;
+            document.getElementById('expiryDate').textContent = savedData.expiryDate;
+            document.getElementById('issuedBy').textContent = savedData.issuedBy;
+            document.getElementById('categories').textContent = savedData.categories;
+        });
+
+        function showQR() {
+            // Redirect to QR code page
+            window.location.href = 'qr.html?type=prawojazdy';
+        }
+
+        function showDetails() {
+            // Show detailed view
+            alert('Szczegóły prawa jazdy');
+        }
+    </script>
+</body>
+</html>
