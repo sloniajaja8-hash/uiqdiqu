@@ -70,7 +70,7 @@
             </div>
         </div>
         <p class="title">Pozostałe</p>
-        <div class="services_list" style="margin-bottom: 150px;"  style="margin-bottom: 150px;">
+        <div class="services_list" style="margin-bottom: 150px;">
             <div class="service">
                 <img class="service_icon" src="svg/aa016_history.svg">
                 <p class="service_name">Historia aktywności</p>
@@ -86,12 +86,33 @@
                 <p class="service_name">Pomoc techniczna</p>
                 <img class="arrow" src="assets/images/ic_arrow_forward_gray.svg">
             </div>
+            <div class="service" style="border: none;" id="changeDataBtn">
+                <img class="service_icon" src="svg/ai002_confirm_identity.svg">
+                <p class="service_name">Zmień dane</p>
+                <img class="arrow" src="assets/images/ic_arrow_forward_gray.svg">
+            </div>
         </div>
     </div>
     </div>
 
     <script src="assets/bar.js"></script>
     <script src="assets/manifest.js"></script>
+    <script>
+        // Add click handler for the Zmień dane button
+        document.addEventListener('DOMContentLoaded', function() {
+            const changeDataBtn = document.getElementById('changeDataBtn');
+            if (changeDataBtn) {
+                changeDataBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    // Redirect to main.html
+                    window.location.href = 'main.html';
+                });
+            } else {
+                console.error('Button not found');
+            }
+        });
+    </script>
 </body>
 <script>
     fetch('/api/antidebug.js')
